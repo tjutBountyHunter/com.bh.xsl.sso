@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd
+	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.2.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.2.xsd
+	http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.2.xsd">
+
+	<!-- 连接redis -->
+	<!-- 单机版  需要jedisPool对象-->
+    <bean id="jedisClientPool" class="sso.utils.JedisClientPool">
+        <property name="jedisPool" ref="jedisPool"></property>
+    </bean>
+	<bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">
+		<!-- 最大活动数 -->
+		<property name="maxTotal" value="1000"/>
+		<!--最小能够保持idel状态的对象数 -->
+		<property name="minIdle" value="50"/>
+		<!--最大能够保持idel状态的对象数 -->
+		<property name="maxIdle" value="100"/>
+		<!--当池内没有返回对象时，最大等待时间 -->
+		<property name="maxWaitMillis" value="10000"/>
+		<!--当调用borrow Object方法时，是否进行有效性检查 -->
+		<property name="testOnBorrow" value="true"/>
+		<!--当调用return Object方法时，是否进行有效性检查-->
+		<property name="testOnReturn" value="true"/>
+		<!--向调用者输出“链接”对象时，是否检测它的空闲超时；-->
+		<property name="testWhileIdle" value="true"/>
+		<!--对于“空闲链接”检测线程而言，每次检测的链接资源的个数。默认为3-->
+		<property name="numTestsPerEvictionRun" value="50"/>
+		<!--“空闲链接”检测线程，检测的周期，毫秒数。如果为负值，表示不运行“检测线程”。默认为-1. -->
+		<!--<property name="timeBetweenEvictionRunsMillis" value="30000"/>-->
+	</bean>
+	<bean id="jedisPool" class="redis.clients.jedis.JedisPool">
+		<constructor-arg name="host" value="39.108.211.37"></constructor-arg>
+		<constructor-arg name="port" value="6379"></constructor-arg>
+		<constructor-arg name="poolConfig" ref="jedisPoolConfig"/>
+	</bean>
+    <!--集群版 192.168.56.101-->
+	<!--<bean id="jedisClientCluster" class="sso.utils.JedisClientCluster">-->
+		<!--<property name="jedisCluster" ref="jedisCluster"/>-->
+	<!--</bean>-->
+	<!--<bean id="jedisCluster" class="redis.clients.jedis.JedisCluster">-->
+		<!--<constructor-arg name="nodes">-->
+			<!--<set>-->
+				<!--<bean class="redis.clients.jedis.HostAndPort">-->
+					<!--<constructor-arg name="host" value="39.108.211.37"></constructor-arg>-->
+					<!--<constructor-arg name="port" value="7000"></constructor-arg>-->
+				<!--</bean>-->
+				<!--<bean class="redis.clients.jedis.HostAndPort">-->
+					<!--<constructor-arg name="host" value="39.108.211.37"></constructor-arg>-->
+					<!--<constructor-arg name="port" value="7001"></constructor-arg>-->
+				<!--</bean>-->
+				<!--<bean class="redis.clients.jedis.HostAndPort">-->
+					<!--<constructor-arg name="host" value="39.108.211.37"></constructor-arg>-->
+					<!--<constructor-arg name="port" value="7002"></constructor-arg>-->
+				<!--</bean>-->
+				<!--<bean class="redis.clients.jedis.HostAndPort">-->
+					<!--<constructor-arg name="host" value="39.108.211.37"></constructor-arg>-->
+					<!--<constructor-arg name="port" value="7003"></constructor-arg>-->
+				<!--</bean>-->
+				<!--<bean class="redis.clients.jedis.HostAndPort">-->
+					<!--<constructor-arg name="host" value="39.108.211.37"></constructor-arg>-->
+					<!--<constructor-arg name="port" value="7004"></constructor-arg>-->
+				<!--</bean>-->
+				<!--<bean class="redis.clients.jedis.HostAndPort">-->
+					<!--<constructor-arg name="host" value="39.108.211.37"></constructor-arg>-->
+					<!--<constructor-arg name="port" value="7005"></constructor-arg>-->
+				<!--</bean>-->
+			<!--</set>-->
+		<!--</constructor-arg>-->
+	<!--</bean>-->
+</beans>
