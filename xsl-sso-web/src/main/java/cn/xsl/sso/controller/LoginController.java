@@ -64,7 +64,9 @@ public class LoginController {
          * @return: java.lang.String
          * @auther: 11432_000
          * @date: 2018/9/22 10:21
+         *
          */
+        getUrl(request);
         request.setAttribute("returnUrl",request.getParameter("returnUrl"));
         return "index";
     }
@@ -97,8 +99,6 @@ public class LoginController {
 //            CookieUtils.setCookie(request , response , cookieId , json.get("managerKey"));
             setCookie(response , TOKEN_KEY ,tokenKey);
             setCookie(response ,cookieId ,json.get("managerKey"));
-            System.out.println("cookies" + CookieUtils.getCookieValue(request ,TOKEN_KEY));
-            System.out.println("cg");
             return JsonUtils.objectToJson(map);
         }
         map.put("statu",loginResult.getStatus());
@@ -129,5 +129,14 @@ public class LoginController {
         cookie.setPath("/");
         cookie.setMaxAge(TOKEN_EXPIRE_TIME);
         response.addCookie(cookie);
+    }
+
+
+    private void getUrl(HttpServletRequest request){
+        String path = request.getContextPath();
+        String basePath = request.getScheme() + "://"
+                + request.getServerName() + ":" + request.getServerPort()
+                + path + "/";
+        request.setAttribute("basePath",basePath);
     }
 }

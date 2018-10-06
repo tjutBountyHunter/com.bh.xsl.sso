@@ -8,7 +8,7 @@
     <result column="status" property="status" jdbcType="TINYINT" />
     <result column="creat_time" property="creatTime" jdbcType="DATE" />
     <result column="remove_time" property="removeTime" jdbcType="DATE" />
-    <result column="last_login_date" property="lastLoginDate" jdbcType="TIMESTAMP" />
+    <result column="last_login_date" property="lastLoginDate" javaType="String" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >

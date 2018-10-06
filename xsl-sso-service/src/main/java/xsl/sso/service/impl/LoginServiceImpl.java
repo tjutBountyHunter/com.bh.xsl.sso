@@ -9,10 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
-import sso.utils.JedisClient;
-import sso.utils.JsonUtils;
-import sso.utils.Md5Utils;
-import sso.utils.ResultUtils;
+import sso.utils.*;
 import xsl.sso.service.LoginService;
 
 import javax.annotation.Resource;
@@ -106,6 +103,8 @@ public class LoginServiceImpl implements LoginService {
         criteria.andManagerPasswordEqualTo(password);
         List<XslManager> xslManagers = xslManagerMapper.selectByExample(example);
         if (xslManagers != null && xslManagers.size() > 0){
+            xslManagers.get(0).setLastLoginDate(DateUtils.getDateTimeToString());
+            xslManagerMapper.updateByPrimaryKeySelective(xslManagers.get(0));
             return xslManagers.get(0);
         }
         return null;

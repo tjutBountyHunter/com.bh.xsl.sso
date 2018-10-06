@@ -15,7 +15,7 @@ public class XslManager {
 
     private Date removeTime;
 
-    private Date lastLoginDate;
+    private String lastLoginDate;
 
     public Integer getId() {
         return id;
@@ -65,11 +65,11 @@ public class XslManager {
         this.removeTime = removeTime;
     }
 
-    public Date getLastLoginDate() {
+    public String getLastLoginDate() {
         return lastLoginDate;
     }
 
-    public void setLastLoginDate(Date lastLoginDate) {
+    public void setLastLoginDate(String lastLoginDate) {
         this.lastLoginDate = lastLoginDate;
     }
 }
