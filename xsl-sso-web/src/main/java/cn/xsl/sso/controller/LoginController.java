@@ -95,8 +95,6 @@ public class LoginController {
             String tokenKey = tokenUtils.checkOrLoginSuccess(json.get("managerKey"));
             map.put(STATU,loginResult.getStatus());
             map.put(RETURN_URL,returnUrl);
-//            CookieUtils.setCookie(request ,response ,TOKEN_KEY ,tokenKey);
-//            CookieUtils.setCookie(request , response , cookieId , json.get("managerKey"));
             setCookie(response , TOKEN_KEY ,tokenKey);
             setCookie(response ,cookieId ,json.get("managerKey"));
             return JsonUtils.objectToJson(map);

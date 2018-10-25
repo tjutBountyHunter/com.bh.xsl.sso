@@ -23,6 +23,7 @@
                 <constructor-arg index="0" value="UTF-8" />
             </bean>
         </mvc:message-converters>
+        <!-- 将路径上的参数映射到方法的传入参数中 -->
     </mvc:annotation-driven>
 
     <bean class="WebUtils.TokenUtils" id="tokenUtils"/>
@@ -34,7 +35,7 @@
     <mvc:resources location="/WEB-INF/css/" mapping="/css/**"/>
     <mvc:resources location="/WEB-INF/js/" mapping="/js/**"/>
 
-    <!-- 视图解析器 -->
+    <!-- 视图解析器 多个视图解析器时 InternalResourceViewResolver放在最后 order排序 -->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver" >
         <property name="prefix" value="/WEB-INF/jsp/" />
         <property name="suffix" value=".jsp" />

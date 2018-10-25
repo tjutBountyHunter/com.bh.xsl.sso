@@ -13,10 +13,7 @@ import sso.utils.*;
 import xsl.sso.service.LoginService;
 
 import javax.annotation.Resource;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * 说明：登录服务
@@ -103,7 +100,7 @@ public class LoginServiceImpl implements LoginService {
         criteria.andManagerPasswordEqualTo(password);
         List<XslManager> xslManagers = xslManagerMapper.selectByExample(example);
         if (xslManagers != null && xslManagers.size() > 0){
-            xslManagers.get(0).setLastLoginDate(DateUtils.getDateTimeToString());
+            xslManagers.get(0).setLastLoginDate(new Date());
             xslManagerMapper.updateByPrimaryKeySelective(xslManagers.get(0));
             return xslManagers.get(0);
         }

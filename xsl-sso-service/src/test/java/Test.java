@@ -1,4 +1,5 @@
 import org.springframework.util.DigestUtils;
+import sso.utils.DateUtils;
 import sso.utils.Md5Utils;
 
 import java.io.UnsupportedEncodingException;
@@ -17,17 +18,8 @@ public class Test {
 
     @org.junit.Test
     public void test(){
-        String digest = "2017-09-18 19:11:55.5";
-        String format = "";
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S");
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        try {
-            Date date = simpleDateFormat.parse(digest);
-            System.out.println(date.getTime());
-            format = sdf.format(date);
-        } catch (ParseException e) {
-            System.out.println("异常");
-        }
-        System.out.println(format);
+        String dateTimeToString = DateUtils.getDateTimeToString();
+        dateTimeToString = dateTimeToString.substring(0 ,dateTimeToString.length()-2);
+        System.out.println(dateTimeToString);
     }
 }

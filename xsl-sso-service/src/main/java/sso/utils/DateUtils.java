@@ -20,8 +20,10 @@ public class DateUtils {
     }
 
     public static String getDateTimeToString(){
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        return sdf.format(new Date());
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S");
+        String format = simpleDateFormat.format(new Date());
+        format = format.substring(0 ,format.length()-2);
+        return format;
     }
 
     public static String dateTimeToString(String dateTime){

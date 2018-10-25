@@ -39,7 +39,7 @@ public class JwtServiceImpl implements JwtService {
     private static final String SECRET = "jfiskaiifdhgailbghailfgahgfkdyvd";
     /** token有效期*/
     private static final int CALENDAR_UTIL = Calendar.MINUTE;
-    private static final int TERM_OF_VALIDITY = 15;
+    private static final int TERM_OF_VALIDITY = 30;
     /** header和payload编码格式*/
     private static final JWSAlgorithm JWT_CODE = JWSAlgorithm.HS256;
     /** 网络时间获取地址*/
